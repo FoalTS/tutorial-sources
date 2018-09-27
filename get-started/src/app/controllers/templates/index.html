@@ -1,61 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="csrf-token" content="<%= csrfToken %>">
-  <title><%= appName %></title>
-  <link rel="shortcut icon" href="logo.png">
-  <style>
-    html, body {
-      height: 100%
-    }
-    body {
-      margin: 0;
-      background: linear-gradient(to bottom right, #116dd6, #bcd8f9);
-      text-align: center;
-      font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
-    }
-    .wrapper {
-      height: 80%;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-    h1 {
-      color: white;
-      font-weight: bold;
-      margin-bottom: 40px
-    }
-    a {
-      color: white;
-      background-color: #126cda;
-      border-color: #126cda;
-      border-radius: 30px;
-      padding: 0.75rem 2.25rem;
-      text-decoration: none;
-      font-weight: bold;
-      margin: 0px 10px;
-    }
-    img{
-      background-color: white;
-      padding: 10px 40px;
-      border-radius: 80px;
-      background-color: #f1f6fc;
-    }
-  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Todo App</title>
+  <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-  <div class="wrapper">
-    <div class="img-container">
-      <img src="logo.png" alt="FoalTS logo">
+  <div id="app">
+    <div class="box">
+      <h1>To-Do List</h1>
+      <div class="row" v-for="todo in todos" :key="todo.id">
+        <div class="text">{{ todo.text }}</div>
+        <div class="checkbox-wrapper">
+          <input type="checkbox" v-on:click="deleteTodo(todo)">
+        </div>
+      </div>
+      <div class="row">
+        <input type="text" class="text-input" v-on:keyup.enter="addNewTodo" v-model="newTodoText" placeholder="Type a new to-do and press Enter">
+      </div>
     </div>
-    <h1>You have successfully installed FoalTS!</h1>
-    <div>
-      <a href="https://foalts.gitbook.io/docs/">Documentation</a>
-      <a href="https://twitter.com/FoalTs">Twitter</a>
-      <a href="https://foalts.org/">FoalTS Website</a>
+
+    <div class="box error-box" v-if="error">
+      <div class="error-header">Error {{ error.status }}: {{ error.statusText }}</div>
+      <div class="error-body">
+        <strong>Request:</strong>
+        <br>
+        - Method: {{ error.request.method }}
+        <br>
+        - URL: {{ error.request.url }}
+      </div>
     </div>
   </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="script.js"></script>
 </body>
+
 </html>
