@@ -6,7 +6,9 @@ import {
   HttpResponseNoContent,
   HttpResponseNotFound,
   HttpResponseOK,
-  Post
+  Post,
+  ValidateBody,
+  ValidateParams
 } from '@foal/core';
 import { getRepository } from 'typeorm';
 
@@ -21,6 +23,14 @@ export class ApiController {
   }
 
   @Post('/api/todos')
+  @ValidateBody({
+    additionalProperties: false,
+    properties: {
+      text: { type: 'string' }
+    },
+    required: [ 'text' ],
+    type: 'object',
+  })
   async postTodo(ctx: Context) {
     const todo = new Todo();
     todo.text = ctx.request.body.text;
@@ -31,6 +41,12 @@ export class ApiController {
   }
 
   @Delete('/api/todos/:id')
+  @ValidateParams({
+    properties: {
+      id: { type: 'number' }
+    },
+    type: 'object',
+  })
   async deleteTodo(ctx: Context) {
     const todo = await getRepository(Todo).findOne({ id: ctx.request.params.id });
     if (!todo) {
