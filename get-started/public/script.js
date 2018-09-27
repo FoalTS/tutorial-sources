@@ -1,5 +1,13 @@
 function request(url, method, body) {
-  return fetch(url, { method, body }).then(response => {
+  const csrfToken = document.getElementById('csrf-token').content;
+  return fetch(url, {
+    method,
+    body: JSON.stringify(body),
+    headers: {
+      'X-CSRF-Token': csrfToken,
+      'Content-Type': 'application/json'
+    }
+  }).then(response => {
     if (!response.ok) {
       return Promise.reject({
         status: response.status,
@@ -8,7 +16,8 @@ function request(url, method, body) {
         url: response.url
       });
     }
-    return response.json();
+    
+    return response.json().catch(() => {});
   });
 }
 
@@ -40,8 +49,13 @@ const app = new Vue({
 
       this.error = null;
       request('/api/todos/' + todo.id, 'DELETE')
-        .then(() => this.todos = this.todos.filter(td => td.id !== todo.id))
-        .catch(error => this.error = error);
+        .then(() => {
+          const index = this.todos.indexOf(todo);
+          this.todos.splice(index, 1);
+        })
+        .catch(error => {
+          this.error = error;
+        });
     }
   }
 });
