@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Teacher page</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div id="app">
+    <nav id="navbar">
+      <h1>Hello {{ userName }}!</h1>
+      <div>
+        <a href="/logout" class="btn">Log out</a>
+      </div>
+    </nav>
+    <section class="container">
+      <div class="content">
+        <div class="box">
+          <h1>Students</h1>
+          <div class="row" v-for="markAverage in markAverages">
+            <div class="studentName text-center">{{ markAverage.studentName }}</div>
+          </div>
+        </div>
+        <div class="arrow">
+          &rang;
+        </div>
+        <div class="box">
+          <h1>Mark Averages</h1>
+          <div class="row" v-for="markAverage in markAverages">
+            <div class="studentName">{{ markAverage.studentName }}</div>
+            <div>{{ markAverage.value }}</div>
+            <div class="btn-wrapper">
+              <button>X</button>
+            </div>
+          </div>
+          <div class="bottom-row">
+            <input type="text" name="name" class="name" placeholder="Student name">
+            <input type="number" name="mark" class="mark" placeholder="Mark">
+          </div>
+          <div class="add-btn-wrapper">
+            <button class="btn btn-sm">Add</button>
+          </div>
+        </div>
+      </div>
+
+    </section>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        userName: 'Donald Duck',
+        markAverages: [
+          {
+            studentName: 'Donald Duck',
+            value: '15'
+          },
+          {
+            studentName: 'Mary Johnson',
+            value: '12'
+          },
+        ]
+      }
+    });
+  </script>
+</body>
+
+</html>
