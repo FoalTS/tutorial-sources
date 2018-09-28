@@ -1,9 +1,9 @@
 // std
-import { deepStrictEqual, ok, strictEqual } from 'assert';
+import { ok, strictEqual } from 'assert';
 
 // 3p
 import { createController, getHttpMethod, getPath, HttpResponseOK, isHttpResponseOK } from '@foal/core';
-import { Connection, createConnection, getRepository } from 'typeorm';
+import { Connection, createConnection } from 'typeorm';
 
 // App
 import { Todo } from '../entities';
