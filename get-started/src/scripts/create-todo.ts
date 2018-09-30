@@ -1,11 +1,10 @@
 // 3p
-import { createConnection, getRepository } from 'typeorm';
+import { createConnection } from 'typeorm';
 
 // App
 import { Todo } from '../app/entities';
 
 export const schema = {
-  additionalProperties: false,
   properties: {
     text: { type: 'string' }
   },
@@ -14,12 +13,14 @@ export const schema = {
 };
 
 export async function main(args) {
-  await createConnection();
+  const connection = await createConnection();
 
   const todo = new Todo();
   todo.text = args.text;
 
   console.log(
-    await getRepository(Todo).save(todo)
+    await connection.manager.save(todo)
   );
+
+  await connection.close();
 }
