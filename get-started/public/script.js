@@ -26,10 +26,10 @@ const app = new Vue({
   data: {
     newTodoText: '',
     todos: [
-      {
-        id: 1,
-        text: 'Donald Duck'
-      }
+      // {
+      //   id: 1,
+      //   text: 'Donald Duck'
+      // }
     ],
     error: null
   },
