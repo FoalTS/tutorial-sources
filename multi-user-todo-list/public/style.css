@@ -21,16 +21,11 @@ body {
   box-shadow: 0 12px 44px 0 rgba(0,0,0,.06);
 }
 
-.error-box {
-  margin-top: 20px;
+.error {
   color: darkred;
 }
 
-.error-header {
-  margin-bottom: 10px;
-}
-
-.error-body {
+.error-sm {
   font-size: small;
 }
 
@@ -74,3 +69,42 @@ body {
   padding: 10px;
 }
 
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group>div {
+  margin-bottom: 10px;
+  display: flex;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.btn-wrapper>button {
+  background-color: #126cda;
+  border-color: #126cda;
+  color: #fff;
+  border-radius: 30px;
+  padding: 0.5rem 2rem;
+
+  text-decoration: none;
+
+  display: inline-block;
+  font-weight: 400;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  border: 1px solid transparent;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.btn-wrapper>button:hover {
+  background-color: #0f58b3;
+}

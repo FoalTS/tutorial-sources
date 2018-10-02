@@ -10,4 +10,18 @@ export class ViewController {
     }, __dirname);
   }
 
+  @Get('/signin')
+  signin(ctx) {
+    return render('./templates/signin.html', {
+      csrfToken: ctx.request.csrfToken(),
+    }, __dirname);
+  }
+
+  @Get('/signup')
+  signup(ctx) {
+    return render('./templates/signup.html', {
+      csrfToken: ctx.request.csrfToken(),
+    }, __dirname);
+  }
+
 }
