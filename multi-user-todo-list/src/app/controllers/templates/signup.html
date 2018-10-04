@@ -15,14 +15,15 @@
     <div class="box signin">
       <h1>Sign Up</h1>
       <form action="/signup" method="post">
+        <input type="text" name="_csrf" value="<%= csrfToken %>" style="display: none;">
         <div class="form-group">
           <div>
             <label for="email">Email</label>
           </div>
           <div>
-            <input type="email" class="text-input" id="email" placeholder="Email" required>
+            <input type="email" class="text-input" id="email" name="email" placeholder="Email" required>
           </div>
-          <div class="error error-sm">
+          <div class="error error-sm" id="emailAlreadyTaken">
             This email has already an account.
           </div>
         </div>
@@ -31,18 +32,30 @@
             <label for="password">Password</label>
           </div>
           <div>
-            <input type="password" class="text-input" id="password" placeholder="Password" required>
+            <input type="password" class="text-input" id="password" name="password" placeholder="Password" required>
+          </div>
+          <div class="error error-sm" id="passwordTooCommon">
+            This password is too common. Please choose another one.
           </div>
         </div>
         <div class="btn-wrapper text-center">
-          <button type="submit">Create an account</button>
+          <button type="submit" class="btn">Create an account</button>
         </div>
       </form>
     </div>
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-  <script src="script.js"></script>
+  <script>
+    var url = new URL(window.location.href);
+    var passwordTooCommon = url.searchParams.get('password_too_common');
+    if (!passwordTooCommon) {
+      document.getElementById('passwordTooCommon').style.display = 'none';
+    }
+    var emailAlreadyTaken = url.searchParams.get('email_already_taken');
+    if (!emailAlreadyTaken) {
+      document.getElementById('emailAlreadyTaken').style.display = 'none';
+    }
+  </script>
 </body>
 
 </html>

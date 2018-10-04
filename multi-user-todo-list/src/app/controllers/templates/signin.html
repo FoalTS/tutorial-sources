@@ -5,7 +5,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <meta id="csrf-token" content="<%= csrfToken %>">
   <title>Sign In</title>
   <link rel="stylesheet" href="style.css">
 </head>
@@ -15,7 +14,8 @@
     <div class="box signin">
       <h1>Sign In</h1>
       <form action="/login" method="post">
-        <div class="form-group error text-center">
+        <input type="text" name="_csrf" value="<%= csrfToken %>" style="display: none;">
+        <div class="form-group error text-center" id="invalidPassword">
           Invalid email or password.
         </div>
         <div class="form-group">
@@ -23,7 +23,7 @@
             <label for="email">Email</label>
           </div>
           <div>
-            <input type="email" class="text-input" id="email" placeholder="Email" required>
+            <input type="email" class="text-input" id="email" name="email" placeholder="Email" required>
           </div>
         </div>
         <div class="form-group">
@@ -31,18 +31,23 @@
             <label for="password">Password</label>
           </div>
           <div>
-            <input type="password" class="text-input" id="password" placeholder="Password" required>
+            <input type="password" class="text-input" id="password" name="password" placeholder="Password" required>
           </div>
         </div>
         <div class="btn-wrapper text-center">
-          <button type="submit">Log in</button>
+          <button type="submit" class="btn">Log in</button>
         </div>
       </form>
     </div>
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-  <script src="script.js"></script>
+  <script>
+    var url = new URL(window.location.href);
+    var badCredentials = url.searchParams.get('bad_credentials');
+    if (!badCredentials) {
+      document.getElementById('invalidPassword').style.display = 'none';
+    }
+  </script>
 </body>
 
 </html>

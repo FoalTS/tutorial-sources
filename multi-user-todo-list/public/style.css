@@ -6,10 +6,16 @@ body {
   margin: 0;
   display: flex;
   flex-direction: column;
+  font-family: avenir next,helvetica neue,Arial,sans-serif,apple color emoji,segoe ui emoji,segoe ui symbol;
+}
+
+#app {
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   background-color: #f7f7f7;
-  font-family: avenir next,helvetica neue,Arial,sans-serif,apple color emoji,segoe ui emoji,segoe ui symbol;
 }
 
 .box {
@@ -82,7 +88,7 @@ body {
   text-align: center;
 }
 
-.btn-wrapper>button {
+.btn {
   background-color: #126cda;
   border-color: #126cda;
   color: #fff;
@@ -107,4 +113,10 @@ body {
 
 .btn-wrapper>button:hover {
   background-color: #0f58b3;
+}
+
+.navbar {
+  display: flex;
+  flex-direction: row-reverse;
+  padding: 10px;
 }

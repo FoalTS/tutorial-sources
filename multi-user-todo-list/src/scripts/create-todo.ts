@@ -2,21 +2,30 @@
 import { createConnection } from 'typeorm';
 
 // App
-import { Todo } from '../app/entities';
+import { Todo, User } from '../app/entities';
 
 export const schema = {
   properties: {
-    text: { type: 'string' }
+    owner: { type: 'string', format: 'email' },
+    text: { type: 'string' },
   },
-  required: [ 'text' ],
+  required: [ 'owner', 'text' ],
   type: 'object',
 };
 
 export async function main(args) {
   const connection = await createConnection();
 
+  const user = await connection.getRepository(User).findOne({ email: args.owner });
+
+  if (!user) {
+    console.log('No user was found the the email ' + args.owner);
+    return;
+  }
+
   const todo = new Todo();
   todo.text = args.text;
+  todo.owner = user;
 
   console.log(
     await connection.manager.save(todo)

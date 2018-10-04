@@ -1,11 +1,11 @@
-import { Config, Get, render } from '@foal/core';
+import { Get, LoginRequired, render } from '@foal/core';
 
 export class ViewController {
 
   @Get('/')
+  @LoginRequired({ redirect: '/signin' })
   index(ctx) {
     return render('./templates/index.html', {
-      appName: Config.get('app', 'name'),
       csrfToken: ctx.request.csrfToken(),
     }, __dirname);
   }
