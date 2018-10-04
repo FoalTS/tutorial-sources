@@ -1,7 +1,6 @@
 // 3p
-import { Group, Permission } from '@foal/core';
 import { isCommon } from '@foal/password';
-import { createConnection, getManager } from 'typeorm';
+import { createConnection, getConnection, getManager } from 'typeorm';
 
 // App
 import { User } from '../app/entities';
@@ -35,4 +34,6 @@ export async function main(args) {
   } catch (error) {
     console.log(error.message);
   }
+
+  await getConnection().close();
 }

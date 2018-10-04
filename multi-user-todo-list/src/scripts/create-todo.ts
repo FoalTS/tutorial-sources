@@ -19,7 +19,7 @@ export async function main(args) {
   const user = await connection.getRepository(User).findOne({ email: args.owner });
 
   if (!user) {
-    console.log('No user was found the the email ' + args.owner);
+    console.log('No user was found with the email ' + args.owner);
     return;
   }
 

@@ -10,7 +10,7 @@ export class Todo {
   @Column()
   text: string;
 
-  @ManyToOne(type => User)
+  @ManyToOne(type => User, { nullable: false })
   owner: User;
 
 }

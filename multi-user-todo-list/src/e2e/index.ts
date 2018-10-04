@@ -43,7 +43,7 @@ describe('The server', () => {
 
       let cookie = '';
       await request(app)
-        .post('/login')
+        .post('/auth/login')
         .send({ email: 'john@foalts.org', password: 'john_password' })
         .expect(302)
         .then(data => {
