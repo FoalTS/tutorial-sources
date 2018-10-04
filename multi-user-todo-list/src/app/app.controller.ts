@@ -8,7 +8,7 @@ export class AppController {
   subControllers = [
     controller('/', ViewController),
     controller('/', ApiController),
-    controller('/', AuthController),
+    controller('/auth', AuthController),
     controller('/', SignUpController),
   ];
 }

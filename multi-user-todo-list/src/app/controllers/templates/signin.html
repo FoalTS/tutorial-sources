@@ -13,7 +13,7 @@
   <div id="app">
     <div class="box signin">
       <h1>Sign In</h1>
-      <form action="/login" method="post">
+      <form action="/auth/login" method="post">
         <input type="text" name="_csrf" value="<%= csrfToken %>" style="display: none;">
         <div class="form-group error text-center" id="invalidPassword">
           Invalid email or password.
@@ -34,10 +34,13 @@
             <input type="password" class="text-input" id="password" name="password" placeholder="Password" required>
           </div>
         </div>
-        <div class="btn-wrapper text-center">
+        <div class="btn-wrapper text-center mb-10">
           <button type="submit" class="btn">Log in</button>
         </div>
       </form>
+      <div class="btn-wrapper text-center">
+        <a class="btn btn-orange btn-sm" href="/signup">Sign Up</a>
+      </div>
     </div>
   </div>
 

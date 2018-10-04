@@ -111,6 +111,21 @@ body {
   line-height: 1.5;
 }
 
+.btn-orange {
+  background-color: #da7312;
+  border-color: #da7d12;
+}
+
+.btn-sm {
+  line-height: 1;
+  padding: 6px;
+  font-size: 0.7rem;
+}
+
+.mb-10 {
+  margin-bottom: 10px;
+}
+
 .btn-wrapper>button:hover {
   background-color: #0f58b3;
 }
