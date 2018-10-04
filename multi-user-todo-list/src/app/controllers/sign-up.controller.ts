@@ -4,7 +4,6 @@ import { isCommon } from '@foal/password';
 import { getRepository } from 'typeorm';
 
 // App
-import { promisify } from 'util';
 import { User } from '../entities';
 
 export class SignUpController {
@@ -32,7 +31,6 @@ export class SignUpController {
     // Log the user in.
     ctx.request.session.authentication = ctx.request.session.authentication || {};
     ctx.request.session.authentication.userId = user.id;
-    ctx.user = user;
 
     // Redirect the user to her/his to-do list.
     return new HttpResponseRedirect('/');
