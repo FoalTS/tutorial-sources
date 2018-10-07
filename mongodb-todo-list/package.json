@@ -32,9 +32,10 @@
   "dependencies": {
     "@foal/core": "0.6.0-beta.5",
     "@foal/ejs": "0.6.0-beta.5",
+    "connect-sqlite3": "^0.9.11",
+    "mongodb": "^3.1.6",
     "source-map-support": "^0.5.1",
     "sqlite3": "^4.0.0",
-    "connect-sqlite3": "^0.9.11",
     "typeorm": "^0.2.6"
   },
   "devDependencies": {
