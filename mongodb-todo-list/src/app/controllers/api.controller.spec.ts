@@ -30,7 +30,7 @@ describe('ApiController', () => {
 
     it('should handle requests at GET /.', () => {
       strictEqual(getHttpMethod(ApiController, 'getTodos'), 'GET');
-      strictEqual(getPath(ApiController, 'getTodos'), '/api/todos');
+      strictEqual(getPath(ApiController, 'getTodos'), '/todos');
     });
 
     it('should return an HttpResponseOK.', async () => {

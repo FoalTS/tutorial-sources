@@ -6,9 +6,9 @@ import { getRepository } from 'typeorm';
 // App
 import { User } from '../entities';
 
-export class SignUpController {
+export class SignupController {
 
-  @Post('/signup')
+  @Post()
   @ValidateBody(emailSchema)
   async signup(ctx: Context) {
     // Check that the password is not too common.

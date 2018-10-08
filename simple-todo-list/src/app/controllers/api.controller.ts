@@ -16,13 +16,13 @@ import { Todo } from '../entities';
 
 export class ApiController {
 
-  @Get('/api/todos')
+  @Get('/todos')
   async getTodos() {
     const todos = await getRepository(Todo).find();
     return new HttpResponseOK(todos);
   }
 
-  @Post('/api/todos')
+  @Post('/todos')
   @ValidateBody({
     additionalProperties: false,
     properties: {
@@ -40,7 +40,7 @@ export class ApiController {
     return new HttpResponseCreated(todo);
   }
 
-  @Delete('/api/todos/:id')
+  @Delete('/todos/:id')
   @ValidateParams({
     properties: {
       id: { type: 'number' }
