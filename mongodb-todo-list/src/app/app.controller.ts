@@ -7,6 +7,6 @@ import { User } from './entities';
 export class AppController {
   subControllers = [
     controller('/', ViewController),
-    controller('/', ApiController)
+    controller('/api', ApiController)
   ];
 }

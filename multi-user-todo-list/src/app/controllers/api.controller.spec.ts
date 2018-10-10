@@ -30,7 +30,7 @@ describe('ApiController', () => {
 
     it('should handle requests at GET /.', () => {
       strictEqual(getHttpMethod(ApiController, 'getTodos'), 'GET');
-      strictEqual(getPath(ApiController, 'getTodos'), '/api/todos');
+      strictEqual(getPath(ApiController, 'getTodos'), '/todos');
     });
 
     it('should return an HttpResponseOK.', async () => {
@@ -45,11 +45,11 @@ describe('ApiController', () => {
       const response = await controller.getTodos();
       ok(isHttpResponseOK(response), 'response should be an instance of HttpResponseOK.');
 
-      const content = (response as HttpResponseOK).content;
+      const body = (response as HttpResponseOK).body;
 
-      ok(Array.isArray(content), 'The content of the response should be an array.');
-      strictEqual(content[0].text, 'Todo 1');
-      strictEqual(content[1].text, 'Todo 2');
+      ok(Array.isArray(body), 'The content of the response should be an array.');
+      strictEqual(body[0].text, 'Todo 1');
+      strictEqual(body[1].text, 'Todo 2');
     });
 
   });
