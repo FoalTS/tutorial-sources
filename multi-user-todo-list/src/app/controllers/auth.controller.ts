@@ -1,17 +1,33 @@
 // 3p
-import { emailSchema, LoginController, strategy } from '@foal/core';
+import {
+  Context, dependency, emailSchema, Get, HttpResponseRedirect,
+  logIn, logOut, Post, ValidateBody
+} from '@foal/core';
 
 // App
 import { Authenticator } from '../services';
 
-export class AuthController extends LoginController {
-  strategies = [
-    strategy('login', Authenticator, emailSchema)
-  ];
+export class AuthController {
+  @dependency
+  authenticator: Authenticator;
 
-  redirect = {
-    failure: '/signin?bad_credentials=true',
-    logout: '/signin',
-    success: '/',
-  };
+  @Post('/login')
+  @ValidateBody(emailSchema)
+  async login(ctx: Context) {
+    const user = await this.authenticator.authenticate(ctx.request.body);
+
+    if (!user) {
+      return new HttpResponseRedirect('/signin?bad_credentials=true');
+    }
+
+    logIn(ctx, user);
+
+    return new HttpResponseRedirect('/');
+  }
+
+  @Get('/logout')
+  logout(ctx) {
+    logOut(ctx);
+    return new HttpResponseRedirect('/signin');
+  }
 }
