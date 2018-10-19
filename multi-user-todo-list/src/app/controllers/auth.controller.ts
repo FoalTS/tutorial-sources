@@ -12,7 +12,15 @@ export class AuthController {
   authenticator: Authenticator;
 
   @Post('/login')
-  @ValidateBody(emailSchema)
+  @ValidateBody({
+    additionalProperties: false,
+    properties: {
+        email: { type: 'string', format: 'email' },
+        password: { type: 'string' }
+    },
+    required: ['email', 'password'],
+    type: 'object',
+  })
   async login(ctx: Context) {
     const user = await this.authenticator.authenticate(ctx.request.body);
 
