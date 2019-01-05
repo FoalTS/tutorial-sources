@@ -1,17 +1,16 @@
 // 3p
 import {
-  Context, dependency, emailSchema, Get, HttpResponseRedirect,
-  logIn, logOut, Post, ValidateBody
+  Context, Get, HttpResponseRedirect,
+  logIn, logOut, Post, ValidateBody, verifyPassword
 } from '@foal/core';
+import { getRepository } from 'typeorm';
 
-// App
-import { Authenticator } from '../services';
+import { User } from '../entities';
 
 export class AuthController {
-  @dependency
-  authenticator: Authenticator;
 
   @Post('/login')
+  // Validate the request body.
   @ValidateBody({
     additionalProperties: false,
     properties: {
@@ -22,20 +21,31 @@ export class AuthController {
     type: 'object',
   })
   async login(ctx: Context) {
-    const user = await this.authenticator.authenticate(ctx.request.body);
+    const user = await getRepository(User).findOne({ email: ctx.request.body.email });
 
     if (!user) {
+      // Redirect the user to /signin if the authentication fails.
       return new HttpResponseRedirect('/signin?bad_credentials=true');
     }
 
+    if (!await verifyPassword(ctx.request.body.password, user.password)) {
+      // Redirect the user to /signin if the authentication fails.
+      return new HttpResponseRedirect('/signin?bad_credentials=true');
+    }
+
+    // Add the user to the current session.
     logIn(ctx, user);
 
+    // Redirect the user to the home page on success.
     return new HttpResponseRedirect('/');
   }
 
   @Get('/logout')
   logout(ctx) {
+    // Remove the user from the session.
     logOut(ctx);
+
+    // Redirect the user to the signin page.
     return new HttpResponseRedirect('/signin');
   }
 }

@@ -1,5 +1,5 @@
 // 3p
-import { Context, emailSchema, HttpResponseRedirect, Post, ValidateBody } from '@foal/core';
+import { Context, HttpResponseRedirect, logIn, Post, ValidateBody } from '@foal/core';
 import { isCommon } from '@foal/password';
 import { getRepository } from 'typeorm';
 
@@ -9,7 +9,15 @@ import { User } from '../entities';
 export class SignupController {
 
   @Post()
-  @ValidateBody(emailSchema)
+  @ValidateBody({
+    additionalProperties: false,
+    properties: {
+      email: { type: 'string', format: 'email' },
+      password: { type: 'string' }
+    },
+    required: [ 'email', 'password' ],
+    type: 'object',
+  })
   async signup(ctx: Context) {
     // Check that the password is not too common.
     if (await isCommon(ctx.request.body.password)) {
@@ -29,8 +37,7 @@ export class SignupController {
     await getRepository(User).save(user);
 
     // Log the user in.
-    ctx.request.session.authentication = ctx.request.session.authentication || {};
-    ctx.request.session.authentication.userId = user.id;
+    logIn(ctx, user);
 
     // Redirect the user to her/his to-do list.
     return new HttpResponseRedirect('/');
