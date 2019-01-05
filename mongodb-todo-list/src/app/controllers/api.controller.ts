@@ -1,14 +1,6 @@
 import {
-  Context,
-  Delete,
-  Get,
-  HttpResponseCreated,
-  HttpResponseNoContent,
-  HttpResponseNotFound,
-  HttpResponseOK,
-  Post,
-  ValidateBody,
-  ValidateParams
+  Context, Delete, Get, HttpResponseCreated, HttpResponseNoContent,
+  HttpResponseNotFound, HttpResponseOK, Post, ValidateBody, ValidateParams
 } from '@foal/core';
 import { getRepository } from 'typeorm';
 
@@ -24,12 +16,17 @@ export class ApiController {
 
   @Post('/todos')
   @ValidateBody({
-    additionalProperties: false,
+    // The body request should be an object once parsed by the framework.
+    type: 'object',
     properties: {
+      // The "text" property of ctx.request.body should be a string if it exists.
       text: { type: 'string' }
     },
+    // The property "text" is required.
     required: [ 'text' ],
-    type: 'object',
+    // Every additional properties that are not defined in the "properties"
+    // object should be removed.
+    additionalProperties: false,
   })
   async postTodo(ctx: Context) {
     const todo = new Todo();
@@ -43,6 +40,9 @@ export class ApiController {
   @Delete('/todos/:id')
   @ValidateParams({
     properties: {
+      // The id should be a number. If it is not (the request.params object
+      // always has string properties) the hook tries to convert it to a number
+      // before returning a "400 - Bad Request".
       id: { type: 'number' }
     },
     type: 'object',
