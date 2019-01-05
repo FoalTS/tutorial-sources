@@ -1,8 +1,11 @@
-import { AbstractUser/*, parsePassword*/ } from '@foal/core';
-import { /*Column, */Entity } from 'typeorm';
+// import { encryptPassword } from '@foal/core';
+import { /*Column, */Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
-export class User extends AbstractUser {
+export class User {
+
+  @PrimaryGeneratedColumn()
+  id: number;
 
   // @Column({ unique: true })
   // email: string;
@@ -11,9 +14,7 @@ export class User extends AbstractUser {
   // password: string;
 
   // async setPassword(password: string) {
-  //   this.password = await parsePassword(password);
+  //   this.password = await encryptPassword(password);
   // }
 
 }
-
-export { Group, Permission } from '@foal/core';

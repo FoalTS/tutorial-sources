@@ -5,5 +5,5 @@
   "staticUrl": "public/",
   "sessionResave": false,
   "sessionSaveUninitialized": false,
-  "sessionSecret": "2376c5e782bc4a27cf6197c1ea2efb69"
+  "sessionSecret": "cdab0c10db3cab41e0db071c24151298"
 }
