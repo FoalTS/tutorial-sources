@@ -14,7 +14,6 @@
     <div class="box signin">
       <h1>Sign In</h1>
       <form action="/auth/login" method="post">
-        <input type="text" name="_csrf" value="<%= csrfToken %>" style="display: none;">
         <div class="form-group error text-center" id="invalidPassword">
           Invalid email or password.
         </div>

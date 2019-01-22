@@ -35,9 +35,9 @@ export class ApiController {
     todo.text = ctx.request.body.text;
     // Make the current user the owner of the todo.
     todo.owner = ctx.user as User;
-​
+
     await getRepository(Todo).save(todo);
-​
+
     return new HttpResponseCreated(todo);
   }
 
