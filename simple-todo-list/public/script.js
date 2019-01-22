@@ -1,10 +1,8 @@
 function request(url, method, body) {
-  const csrfToken = document.getElementById('csrf-token').content;
   return fetch(url, {
     method,
     body: JSON.stringify(body),
     headers: {
-      'X-CSRF-Token': csrfToken,
       'Content-Type': 'application/json'
     }
   }).then(response => {

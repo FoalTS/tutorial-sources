@@ -55,5 +55,4 @@ export class ApiController {
     await getRepository(Todo).remove(todo);
     return new HttpResponseNoContent();
   }
-
 }
