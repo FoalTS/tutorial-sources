@@ -9,6 +9,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { NavbarComponent } from './pages/home/navbar/navbar.component';
 import { TodoListComponent } from './pages/home/todo-list/todo-list.component';
 import { ErrorPanelComponent } from './pages/home/error-panel/error-panel.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { ErrorPanelComponent } from './pages/home/error-panel/error-panel.compon
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

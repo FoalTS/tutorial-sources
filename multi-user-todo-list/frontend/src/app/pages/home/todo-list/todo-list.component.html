@@ -1,3 +1,12 @@
-<p>
-  todo-list works!
-</p>
+<div class="box">
+  <h1>To-Do List</h1>
+  <div class="row" *ngFor="let todo of todos">
+    <div class="text">{{ todo.text }}</div>
+    <div class="checkbox-wrapper">
+      <input type="checkbox" (ngModelChange)="$event ? onDeleteTodo(todo) : null">
+    </div>
+  </div>
+  <div class="row">
+    <input type="text" class="text-input" #input (keyup.enter)="onAddNewTodo(input.text); input.text=''" placeholder="Type a new to-do and press Enter">
+  </div>
+</div>

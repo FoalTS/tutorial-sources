@@ -1,3 +1,10 @@
-<p>
-  error-panel works!
-</p>
+<div class="box">
+  <div>Error {{ error.status }}: {{ error.statusText }}</div>
+  <div>
+    <strong>Request:</strong>
+    <br>
+    - Method: {{ error.method }}
+    <br>
+    - URL: {{ error.url }}
+  </div>
+</div>

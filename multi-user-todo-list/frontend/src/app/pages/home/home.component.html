@@ -1,3 +1,7 @@
-<p>
-  home works!
-</p>
+<div class="full-height">
+  <app-navbar></app-navbar>
+  <div class="app">
+    <app-todo-list [todos]="todos" (addNewTodo)="addNewTodo($event)" (deleteTodo)="deleteTodo($event)"></app-todo-list>
+    <app-error-panel *ngIf="error" [error]="error"></app-error-panel>
+  </div>
+</div>
