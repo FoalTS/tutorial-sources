@@ -9,7 +9,8 @@ import { HomeComponent } from './pages/home/home.component';
 import { NavbarComponent } from './pages/home/navbar/navbar.component';
 import { TodoListComponent } from './pages/home/todo-list/todo-list.component';
 import { ErrorPanelComponent } from './pages/home/error-panel/error-panel.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { TokenInterceptorService } from './services/token.service';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,13 @@ import { HttpClientModule } from '@angular/common/http';
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptorService,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

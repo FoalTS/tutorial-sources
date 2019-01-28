@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 import { TodoService } from 'src/app/services/todo.service';
-import { Todo, ServerError, NewTodo } from 'src/app/models/todo';
+import { Todo, NewTodo } from 'src/app/models/todo';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-home',
@@ -10,7 +11,7 @@ import { Todo, ServerError, NewTodo } from 'src/app/models/todo';
 })
 export class HomeComponent implements OnInit {
   public todos: Todo[] = [];
-  public error: ServerError = null;
+  public error: HttpErrorResponse = null;
 
   constructor(private todoService: TodoService) { }
 

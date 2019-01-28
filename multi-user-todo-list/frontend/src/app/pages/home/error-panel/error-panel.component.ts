@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-
-import { ServerError } from 'src/app/models/todo';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-error-panel',
@@ -8,7 +7,7 @@ import { ServerError } from 'src/app/models/todo';
   styleUrls: ['./error-panel.component.css']
 })
 export class ErrorPanelComponent implements OnInit {
-  @Input() error: ServerError;
+  @Input() error: HttpErrorResponse;
 
   constructor() { }
 

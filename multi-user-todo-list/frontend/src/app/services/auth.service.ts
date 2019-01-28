@@ -12,6 +12,10 @@ export class AuthService {
     return true;
   }
 
+  getToken(): string {
+    return 'xxx';
+  }
+
   logout(): void {
     // localStorage.setItem('isAuthenticated', false);
     this.router.navigate(['login']);
