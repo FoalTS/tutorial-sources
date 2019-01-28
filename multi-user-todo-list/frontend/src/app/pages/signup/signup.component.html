@@ -1,3 +1,37 @@
-<p>
-  signup works!
-</p>
+<div class="app">
+  <div class="box signin">
+    <h1>Sign Up</h1>
+    <form #signupForm="ngForm" (submit)="submit()">
+      <div class="form-group">
+        <div>
+          <label for="email">Email</label>
+        </div>
+        <div>
+          <input type="email" id="email" name="email" class="text-input" placeholder="Email" 
+            [(ngModel)]="email">
+        </div>
+        <div class="error error-sm" *ngIf="emailRequired && !email">
+          Email is required.
+        </div>
+        <div class="error error-sm" *ngIf="emailAlreadyTaken">
+          This email has already an account.
+        </div>
+      </div>
+      <div class="form-group">
+        <div>
+          <label for="password">Password</label>
+        </div>
+        <div>
+          <input type="password" id="password" name="password" class="text-input" placeholder="Password"
+            [(ngModel)]="password">
+        </div>
+        <div class="error error-sm" *ngIf="passwordRequired && !password">
+          Password is required.
+        </div>
+      </div>
+      <div class="btn-wrapper text-center">
+        <button type="submit" class="btn">Create an account</button>
+      </div>
+    </form>
+  </div>
+</div>
