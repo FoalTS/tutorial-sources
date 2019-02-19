@@ -6,5 +6,6 @@
   "staticUrl": "public/",
   "sessionResave": false,
   "sessionSaveUninitialized": false,
-  "sessionSecret": "487908555a842e7b645debb72e17262d"
+  "sessionSecret": "487908555a842e7b645debb72e17262d",
+  "sessionCookiePath": "/"
 }
