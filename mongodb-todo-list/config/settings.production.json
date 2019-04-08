@@ -1,6 +1,0 @@
-{
-  "sessionCookieHttpOnly": true,
-  "sessionCookieMaxAge": 3600000,
-  "sessionCookieSecure": true,
-  "sessionName": "id"
-}

@@ -1,7 +1,7 @@
 // 3p
-import { createApp } from '@foal/core';
+import { Config, createApp } from '@foal/core';
+import { connect, disconnect } from 'mongoose';
 import * as request from 'supertest';
-import { createConnection, getConnection } from 'typeorm';
 
 // App
 import { AppController } from '../app/app.controller';
@@ -10,12 +10,13 @@ describe('The server', () => {
 
   let app;
 
-  before(async () => {
-    await createConnection();
+  before(() => {
+    const uri = Config.get<string>('mongodb.uri');
+    connect(uri, { useNewUrlParser: true, useCreateIndex: true });
     app = createApp(AppController);
   });
 
-  after(() => getConnection().close());
+  after(() => disconnect());
 
   it('should return a 200 status on GET / requests.', () => {
     return request(app)

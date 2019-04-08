@@ -1,8 +1,9 @@
 // 3p
-import { createConnection } from 'typeorm';
+import { Config } from '@foal/core';
+import { connect, disconnect } from 'mongoose';
 
 // App
-import { Todo } from '../app/entities';
+import { Todo } from '../app/models';
 
 export const schema = {
   properties: {
@@ -14,17 +15,22 @@ export const schema = {
 
 export async function main(args) {
   // Create a new connection to the database.
-  const connection = await createConnection();
+  const uri = Config.get<string>('mongodb.uri');
+  connect(uri, { useNewUrlParser: true, useCreateIndex: true });
 
   // Create a new task with the text given in the command line.
   const todo = new Todo();
   todo.text = args.text;
 
+  try {
   // Save the task in the database and then display it in the console.
-  console.log(
-    await connection.manager.save(todo)
-  );
-
-  // Close the connection to the database.
-  await connection.close();
+    console.log(
+      await todo.save()
+    );
+  } catch (error) {
+    console.log(error.message);
+  } finally {
+    // Close the connection to the database.
+    disconnect();
+  }
 }

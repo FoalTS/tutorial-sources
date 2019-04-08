@@ -1,0 +1,9 @@
+{
+  "mongodb": {
+    "uri": "mongodb://localhost:27017/mongodb-todo-list"
+  },
+  "settings": {
+    "debug": true,
+    "loggerFormat": "dev"
+  }
+}

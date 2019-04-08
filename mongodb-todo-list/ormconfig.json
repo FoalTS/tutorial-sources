@@ -1,7 +1,0 @@
-{
-  "entities": ["build/app/**/*.entity.js"],
-  "type": "mongodb",
-  "host": "localhost",
-  "port": 27017,
-  "database": "todo-app"
-}

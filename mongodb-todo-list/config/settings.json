@@ -1,9 +1,0 @@
-{
-  "csrf": true,
-  "debug": false,
-  "port": 3000,
-  "staticUrl": "public/",
-  "sessionResave": false,
-  "sessionSaveUninitialized": false,
-  "sessionSecret": "cdab0c10db3cab41e0db071c24151298"
-}

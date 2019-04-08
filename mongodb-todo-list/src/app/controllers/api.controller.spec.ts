@@ -3,37 +3,28 @@
 import { ok, strictEqual } from 'assert';
 
 // 3p
-import { createController, getHttpMethod, getPath, HttpResponseOK, isHttpResponseOK } from '@foal/core';
-import { Connection, createConnection } from 'typeorm';
+import { Config, createController, getHttpMethod, getPath, HttpResponseOK, isHttpResponseOK } from '@foal/core';
+import { connect, disconnect } from 'mongoose';
 
 // App
-import { Todo } from '../entities';
+import { Todo } from '../models';
 import { ApiController } from './api.controller';
 
 // Define a group of tests.
 describe('ApiController', () => {
 
   let controller: ApiController;
-  let connection: Connection;
 
   // Create a connection to the database before running all the tests.
   before(async () => {
-    connection = await createConnection({
-      // Choose a test database. You don't want to run your tests on your production data.
-      database: './test_db.sqlite3',
-      // Drop the schema when the connection is established.
-      dropSchema: true,
-      // Register the models that are used.
-      entities: [ Todo ],
-      // Auto create the database schema.
-      synchronize: true,
-      // Specify the type of database.
-      type: 'sqlite',
-    });
+    const uri = Config.get<string>('mongodb.uri');
+    connect(uri, { useNewUrlParser: true, useCreateIndex: true });
+
+    await Todo.remove({});
   });
 
   // Close the database connection after running all the tests whether they succeed or failed.
-  after(() => connection.close());
+  after(() => disconnect());
 
   // Create or re-create the controller before each test.
   beforeEach(() => controller = createController(ApiController));
@@ -59,7 +50,10 @@ describe('ApiController', () => {
       todo2.text = 'Todo 2';
 
       // Save the todos.
-      await connection.manager.save([ todo1, todo2 ]);
+      await Promise.all([
+        todo1.save(),
+        todo2.save()
+      ]);
 
       const response = await controller.getTodos();
       ok(isHttpResponseOK(response), 'response should be an instance of HttpResponseOK.');

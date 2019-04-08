@@ -1,0 +1,17 @@
+{
+  "port": 3001,
+  "settings": {
+    "csrf": false,
+    "debug": false,
+    "loggerFormat": "tiny",
+    "staticUrl": "public/",
+    "session": {
+      "cookie": {
+        "path": "/"
+      },
+      "resave": false,
+      "saveUninitialized": false,
+      "secret": "8c1fb497c941c982334aae99f9b050d2"
+    }
+  }
+}
